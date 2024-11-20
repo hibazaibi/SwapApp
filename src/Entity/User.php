@@ -13,8 +13,8 @@ class User
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $iduser = null;
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $username = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -33,14 +33,14 @@ class User
         return $this->id;
     }
 
-    public function getIduser(): ?int
+    public function getUsername(): ?string
     {
-        return $this->iduser;
+        return $this->username;
     }
 
-    public function setIduser(int $iduser): static
+    public function setUsername(string $username): static
     {
-        $this->iduser = $iduser;
+        $this->username = $username;
 
         return $this;
     }
@@ -91,5 +91,10 @@ class User
         $this->adresse = $adresse;
 
         return $this;
+    }
+    public function __toString(): string
+    {
+        // Represent the Categorie entity as its name or any other meaningful field.
+        return $this->username ?? '';
     }
 }

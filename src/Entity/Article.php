@@ -14,17 +14,11 @@ class Article
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idartice = null;
-
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $conditionarticle = null;
@@ -35,21 +29,27 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categorie $categorie = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    // Adding three BLOB columns for photos
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    private $photo1 = null;
+
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    private $photo2 = null;
+
+    #[ORM\Column(type: Types::BLOB, nullable: true)]
+    private $photo3 = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdartice(): ?int
-    {
-        return $this->idartice;
-    }
-
-    public function setIdartice(int $idartice): static
-    {
-        $this->idartice = $idartice;
-
-        return $this;
     }
 
     public function getTitre(): ?string
@@ -57,10 +57,9 @@ class Article
         return $this->titre;
     }
 
-    public function setTitre(string $titre): static
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
-
         return $this;
     }
 
@@ -69,22 +68,9 @@ class Article
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): static
-    {
-        $this->image = $image;
-
         return $this;
     }
 
@@ -93,10 +79,9 @@ class Article
         return $this->conditionarticle;
     }
 
-    public function setConditionarticle(?string $conditionarticle): static
+    public function setConditionarticle(?string $conditionarticle): self
     {
         $this->conditionarticle = $conditionarticle;
-
         return $this;
     }
 
@@ -105,10 +90,9 @@ class Article
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
         return $this;
     }
 
@@ -117,10 +101,103 @@ class Article
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(string $status): self
     {
         $this->status = $status;
+        return $this;
+    }
 
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    public function getPhoto1(): mixed
+    {
+        return $this->photo1;
+    }
+
+    public function setPhoto1($photo1): self
+    {
+        $this->photo1 = $photo1;
+        return $this;
+    }
+
+    public function getPhoto2(): mixed
+    {
+        return $this->photo2;
+    }
+    private ?string $encodedPhoto1 = null;
+
+    public function getEncodedPhoto1(): ?string
+    {
+        return $this->encodedPhoto1;
+    }
+
+    public function setEncodedPhoto1(?string $encodedPhoto1): self
+    {
+        $this->encodedPhoto1 = $encodedPhoto1;
+        return $this;
+    }
+
+// Encoded Photo 2
+    private ?string $encodedPhoto2 = null;
+
+    public function getEncodedPhoto2(): ?string
+    {
+        return $this->encodedPhoto2;
+    }
+
+    public function setEncodedPhoto2(?string $encodedPhoto2): self
+    {
+        $this->encodedPhoto2 = $encodedPhoto2;
+        return $this;
+    }
+
+// Encoded Photo 3
+    private ?string $encodedPhoto3 = null;
+
+    public function getEncodedPhoto3(): ?string
+    {
+        return $this->encodedPhoto3;
+    }
+
+    public function setEncodedPhoto3(?string $encodedPhoto3): self
+    {
+        $this->encodedPhoto3 = $encodedPhoto3;
+        return $this;
+    }
+    public function setPhoto2($photo2): self
+    {
+        $this->photo2 = $photo2;
+        return $this;
+    }
+
+    public function getPhoto3(): mixed
+    {
+        return $this->photo3;
+    }
+
+    public function setPhoto3($photo3): self
+    {
+        $this->photo3 = $photo3;
         return $this;
     }
 }

@@ -14,14 +14,25 @@ class Request
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $idrequest = null;
+
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $datedemande = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $userid = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Article $Articleid = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Article $articleprop = null;
 
     public function getId(): ?int
     {
@@ -60,6 +71,42 @@ class Request
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getUserid(): ?User
+    {
+        return $this->userid;
+    }
+
+    public function setUserid(?User $userid): static
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    public function getArticleid(): ?Article
+    {
+        return $this->Articleid;
+    }
+
+    public function setArticleid(?Article $Articleid): static
+    {
+        $this->Articleid = $Articleid;
+
+        return $this;
+    }
+
+    public function getArticleprop(): ?Article
+    {
+        return $this->articleprop;
+    }
+
+    public function setArticleprop(?Article $articleprop): static
+    {
+        $this->articleprop = $articleprop;
 
         return $this;
     }

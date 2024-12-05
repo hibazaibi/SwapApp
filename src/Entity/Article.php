@@ -37,7 +37,6 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    // Adding three BLOB columns for photos
     #[ORM\Column(type: Types::BLOB, nullable: true)]
     private $photo1 = null;
 
@@ -133,7 +132,20 @@ class Article
     {
         return $this->photo1;
     }
+    public function getEncodedPhoto1(): ?string
+    {
+        return $this->photo1 ? base64_encode(stream_get_contents($this->photo1)) : null;
+    }
 
+    public function getEncodedPhoto2(): ?string
+    {
+        return $this->photo2 ? base64_encode(stream_get_contents($this->photo2)) : null;
+    }
+
+    public function getEncodedPhoto3(): ?string
+    {
+        return $this->photo3 ? base64_encode(stream_get_contents($this->photo3)) : null;
+    }
     public function setPhoto1($photo1): self
     {
         $this->photo1 = $photo1;
@@ -146,10 +158,6 @@ class Article
     }
     private ?string $encodedPhoto1 = null;
 
-    public function getEncodedPhoto1(): ?string
-    {
-        return $this->encodedPhoto1;
-    }
 
     public function setEncodedPhoto1(?string $encodedPhoto1): self
     {
@@ -160,10 +168,7 @@ class Article
 // Encoded Photo 2
     private ?string $encodedPhoto2 = null;
 
-    public function getEncodedPhoto2(): ?string
-    {
-        return $this->encodedPhoto2;
-    }
+
 
     public function setEncodedPhoto2(?string $encodedPhoto2): self
     {
@@ -174,10 +179,7 @@ class Article
 // Encoded Photo 3
     private ?string $encodedPhoto3 = null;
 
-    public function getEncodedPhoto3(): ?string
-    {
-        return $this->encodedPhoto3;
-    }
+
 
     public function setEncodedPhoto3(?string $encodedPhoto3): self
     {

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Articles{% endblock %}
+
+{% block body %}
+    <h1>My Articles</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Condition</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.id }}</td>
+                <td>{{ article.titre }}</td>
+                <td>{{ article.description }}</td>
+                <td>{{ article.conditionarticle }}</td>
+                <td>{{ article.date ? article.date|date('Y-m-d') : '' }}</td>
+                <td>{{ article.status }}</td>
+                <td>
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">Show</a>
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">You have no articles.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

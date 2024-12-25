@@ -17,12 +17,13 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $conditionarticle = null;
-
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $numberOfOffers = 0;
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
@@ -200,6 +201,16 @@ class Article
     public function setPhoto3($photo3): self
     {
         $this->photo3 = $photo3;
+        return $this;
+    }
+    public function getNumberOfOffers(): ?int
+    {
+        return $this->numberOfOffers;
+    }
+
+    public function setNumberOfOffers(int $numberOfOffers): self
+    {
+        $this->numberOfOffers = $numberOfOffers;
         return $this;
     }
 }

@@ -38,7 +38,20 @@ class Request
     {
         return $this->id;
     }
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $message = null;
 
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
     public function getIdrequest(): ?int
     {
         return $this->idrequest;

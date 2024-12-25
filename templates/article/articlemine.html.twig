@@ -5,37 +5,45 @@
 {% block body %}
     <h1>My Articles</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Condition</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.titre }}</td>
-                <td>{{ article.description }}</td>
-                <td>{{ article.conditionarticle }}</td>
-                <td>{{ article.date ? article.date|date('Y-m-d') : '' }}</td>
-                <td>{{ article.status }}</td>
-                <td>
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">Show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">Edit</a>
-                </td>
-            </tr>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.titre }}</h5>
+                        <p class="card-text">
+                            <strong>Description:</strong> {{ article.description }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Condition:</strong> {{ article.conditionarticle }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Date:</strong> {{ article.date ? article.date|date('Y-m-d') : 'N/A' }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Status:</strong> {{ article.status }}
+                        </p>
+                        <p >
+                            {% if article.photo1 %}
+                                <img style="width: 30%" src="data:image/jpeg;base64,{{ article.encodedPhoto1 }}" alt="Photo 1">
+                            {% else %}
+                                <img src="{{ asset('images/default-placeholder.png') }}" alt="No Image" class="img-fluid rounded-start" style="height: 100%; object-fit: cover;">
+                            {% endif %}
+
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-primary btn-sm">Show</a>
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="7">You have no articles.</td>
-            </tr>
+            <div class="col-12">
+                <div class="alert alert-info">You have no articles.</div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+
+    </div>
+
 {% endblock %}

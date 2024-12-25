@@ -18,6 +18,7 @@ security:
             logout:
                 path: app_logout
                 invalidate_session: true
+                target: /login
             custom_authenticator: App\Security\UserAuthenticator
 
             remember_me:

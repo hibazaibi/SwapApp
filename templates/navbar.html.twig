@@ -15,6 +15,11 @@
   body {
     padding-top: 50px; /* Adjust based on navbar height */
   }
+  .container {
+    width: 100%; /* Make the container responsive */
+    margin: 0 auto; /* Center the container */
+  }
+
 
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -31,9 +36,12 @@
         <li class="nav-item">
           <a class="nav-link active" href="{{ path('app_article_index') }}">Articles</a>
         </li>
+        {% if not is_granted('ROLE_ADMIN') %}
+
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_article_new') }}">Create Article</a>
-        </li>
+        </li>          {% endif %}
+
         <li class="nav-item">
           <a class="nav-link" href="#about">About</a>
         </li>
@@ -44,8 +52,14 @@
       </form>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_user_edit') }}">Profile</a>
+          {% if not is_granted('ROLE_ADMIN') %}
+          <a class="nav-link" href="{{ path('app_user_edit') }}">My infos</a>
+          {% endif %}
+          {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_user_edit') }}">Admin space</a>
         </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_logout') }}">
             <i class="fas fa-sign-out-alt"></i> Logout

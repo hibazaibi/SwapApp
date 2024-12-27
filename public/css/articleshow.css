@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600&display=swap');
 body {
-    font-family: "Titillium Web", sans-serif;
     font-weight: 400;
-    font-size: 14px;
     min-width: 320px;
     position: relative;
     background-image: url('../images/Design sans titre(5).png');
@@ -76,6 +74,10 @@ button {
     min-height: 600px;
     box-shadow: 0 5px 21px rgba(0, 0, 0, 0.08);
     background-color: #fff;
+}
+.container {
+    width: 100%; /* Make the container responsive */
+    margin: 0 auto; /* Center the container */
 }
 
 /* LEFT SIDE */

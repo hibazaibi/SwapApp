@@ -67,7 +67,14 @@
 
         <!-- Navigation Links -->
         <ul class="nav flex-column">
+            {% if  is_granted('ROLE_ADMIN') %}
 
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center" href="{{ path('chart') }}">
+                        <i class="bi bi-speedometer2"></i>
+                        <span class="d-none d-md-inline">Dashboard</span>
+                    </a>
+                </li> {% endif %}
             <li class="nav-item">
                 <a class="nav-link text-white d-flex align-items-center" href="{{ path('app_user_edit') }}">
                     <i class="bi bi-person"></i>
@@ -127,8 +134,8 @@
 
                 <li class="nav-item">
                     <a class="nav-link text-white d-flex align-items-center" href="{{ path('app_article_index') }}">
-                        <i class="bi bi-tags"></i>
-                        <span class="d-none d-md-inline">all Articles </span>
+                        <i class="bi bi-cart-check-fill"></i>
+                        <span class="d-none d-md-inline">All Articles </span>
                     </a>
                 </li> {% endif %}
 

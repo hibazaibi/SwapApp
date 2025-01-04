@@ -12,5 +12,5 @@ const app = startStimulusApp(require.context(
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
-import 'chart.js';
+import Chart from 'chart.js/auto';
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

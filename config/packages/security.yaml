@@ -27,3 +27,6 @@ security:
                 path: /
                 always_remember_me: true
 
+    access_control:
+        - { path: ^/dashboard, roles: ROLE_ADMIN }
+        - { path: ^/request$, roles: ROLE_ADMIN }

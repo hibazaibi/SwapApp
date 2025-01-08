@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Security;
-
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 #[Route('/article')]
 final class ArticleController extends AbstractController
 {
@@ -69,6 +70,7 @@ final class ArticleController extends AbstractController
 
             // Save the article
             $article->setDate(new \DateTime());
+            $article->setStatus("encours");
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -134,4 +136,5 @@ final class ArticleController extends AbstractController
 
         return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }

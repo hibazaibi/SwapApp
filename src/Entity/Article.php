@@ -28,7 +28,7 @@ class Article
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = "Available";
+    private ?string $status = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]

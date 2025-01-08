@@ -31,8 +31,8 @@ class UserType extends AbstractType
             ])
             ->add('pdp', FileType::class, [
                 'label' => 'Profile Picture (Image file)',
-                'mapped' => false,
-                'required' => false,
+                'mapped' => false,  // Prevent automatic mapping to the entity's 'pdp' field
+                'required' => false,  // Make it optional
                 'constraints' => [
                     new File([
                         'maxSize' => '5M',
@@ -40,11 +40,9 @@ class UserType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid image (JPEG, PNG, or GIF)',
                     ])
                 ],
-                'attr' => ['class' => 'custom-file-input'],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Save Changes',
-                'attr' => ['class' => 'btn btn-primary btn-custom'],
+                'label' => 'Save Changes'
             ]);
     }
 

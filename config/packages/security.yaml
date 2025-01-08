@@ -7,10 +7,14 @@ security:
             entity:
                 class: App\Entity\User
                 property: email  # Use "username" if it's the identifier
+        # used to reload user from session & other features (e.g. switch_user)
+
+
 
     firewalls:
         main:
             pattern: ^/
+
             logout:
                 path: app_logout
                 invalidate_session: true
@@ -23,23 +27,6 @@ security:
                 path: /
                 always_remember_me: true
 
-            # Remove the "anonymous" option, as it's implicit
-
     access_control:
-        # Allow anonymous users to access login and register routes
-        - { path: ^/login, roles: PUBLIC_ACCESS }
-        - { path: ^/register, roles: PUBLIC_ACCESS }
-        - { path: ^/article, roles: ROLE_USER }
-        - { path: ^/user/profile, roles: ROLE_USER }
-        - { path: ^/request, roles: ROLE_USER }
-        # Restrict admin routes to ROLE_ADMIN
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/request, roles: ROLE_ADMIN }
-        - { path: ^/cat, roles: ROLE_ADMIN }
-        - { path: ^/user, roles: ROLE_ADMIN }
-
-        # Restrict profile routes to ROLE_USER
-        - { path: ^/profile, roles: ROLE_USER }
-
-        # Default rule: allow all other paths to anonymous users
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/dashboard, roles: ROLE_ADMIN }
+        - { path: ^/request$, roles: ROLE_ADMIN }
